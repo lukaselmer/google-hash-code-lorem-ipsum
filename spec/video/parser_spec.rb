@@ -62,10 +62,20 @@ RSpec.describe Parser do
     expect(parser.request_descriptions[0].endpoint).to eq(parser.endpoints[0])
   end
 
-  # it 'makes the correct endpoint references' do
-  #   expect(parser.endpoints[0].request_descriptions.length).to eq(3)
-  #   expect(parser.endpoints[0].request_descriptions[0]).to eq(parser.request_descriptions[0])
-  #   expect(parser.endpoints[0].request_descriptions[1]).to eq(parser.request_descriptions[2])
-  #   expect(parser.endpoints[0].request_descriptions[2]).to eq(parser.request_descriptions[3])
-  # end
+  it 'makes the correct endpoint references' do
+    expect(parser.endpoints[0].request_descriptions.length).to eq(3)
+    expect(parser.endpoints[0].request_descriptions[0]).to eq(parser.request_descriptions[0])
+    expect(parser.endpoints[0].request_descriptions[1]).to eq(parser.request_descriptions[2])
+    expect(parser.endpoints[0].request_descriptions[2]).to eq(parser.request_descriptions[3])
+  end
+
+  it 'initializes the correct caches' do
+    expect(parser.caches.length).to eq(parser.num_caches)
+    expect(parser.caches[1].id).to eq(1)
+    expect(parser.caches[1].cache_size).to eq(parser.cache_size)
+  end
+
+  it 'references the correct caches to the cache connections' do
+    expect(parser.endpoints[0].cache_connections[1].cache).to eq(parser.caches[2])
+  end
 end
