@@ -3,7 +3,7 @@ class ScoreHash
 
   end
 
-  def points_for_assignment(video_index, cache_index)
+  def score_for_assignment(video_index, cache_index)
     0
   end
 end
