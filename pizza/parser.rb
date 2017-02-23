@@ -13,8 +13,8 @@ class Parser
 
   def parse_header(lines)
     x = lines.shift.split(' ')
-    @min_number_of_ingredient = x[2]
-    @max_cells = x[3]
+    @min_number_of_ingredient = x[2].to_i
+    @max_cells = x[3].to_i
   end
 
   def parse_grid(lines)
