@@ -7,19 +7,21 @@ class ScoreHash
     @request_descriptions = Hash parser.request_descriptions.map {|request| ["#{request.video_id} #{request.endpoint_id}", request]}.to_h
   end
 
-  def score_for_assignment(video_id, cache_id)
+  def score_for_assignment(video, cache)
+    video_id = video.id
+
     score = 0
-    cache = cache_by_id(cache_id)
     connections = cache.cache_connections
     connections.each do |connection|
       endpoint = connection.endpoint
       request = request_by_endpoint_and_video(endpoint, video_id)
+      if request
+        data_center_latency = endpoint.datacenter_latency
+        cache_latency = connection.cache_latency
+        num_requests = request.num_requests
 
-      data_center_latency = endpoint.datacenter_latency
-      cache_latency = connection.cache_latency
-      num_requests = request.num_requests
-
-      score += (data_center_latency - cache_latency) * num_requests * 1000
+        score += (data_center_latency - cache_latency) * num_requests * 1000
+      end
     end
 
     score / total_request_time
