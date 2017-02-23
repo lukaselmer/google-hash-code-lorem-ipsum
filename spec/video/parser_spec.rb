@@ -1,9 +1,9 @@
 require_relative '../spec_helper'
-require_relative '../../pizza/parser'
+require_relative '../../video/parser'
 
 RSpec.describe Parser do
   let(:parser) do
-    parser = Parser.new('pizza/datasets/small.in')
+    parser = Parser.new('video/datasets/small.in')
     parser.parse
     parser
   end
