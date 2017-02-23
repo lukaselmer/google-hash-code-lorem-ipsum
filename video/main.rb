@@ -2,11 +2,12 @@ require_relative 'parser'
 require_relative 'random_optimize'
 require_relative 'export'
 
-data = Parser.new('video/datasets/kittens.in')
-data.parse
+['kittens', 'me_at_the_zoo', 'trending_today', 'videos_worth_spreading'].each do |dataset_name|
+  data = Parser.new("video/datasets/#{dataset_name}.in")
+  data.parse
 
-optimizer = RandomOptimizer.new(data)
-optimizer.run
-p optimizer.solution
+  optimizer = RandomOptimizer.new(data)
+  optimizer.run
 
-Export.new(data.caches).generate_file
+  Export.new(data.caches, dataset_name).generate_file
+end

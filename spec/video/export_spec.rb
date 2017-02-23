@@ -19,7 +19,7 @@ RSpec.describe Export do
   end
 
   describe 'output' do
-    let(:export) { Export.new(caches) }
+    let(:export) { Export.new(caches, 'spec') }
 
     it 'the correct output line length' do
       expect(export.output.length).to eq(4)
@@ -37,7 +37,7 @@ RSpec.describe Export do
   end
 
   describe 'export file' do
-    let(:export) { Export.new(caches) }
+    let(:export) { Export.new(caches, 'spec') }
 
     it 'generates the right export file' do
       expect(export.generate_export_data).to eq(
