@@ -17,20 +17,32 @@ RSpec.describe Parser do
   end
 
   it 'parses the videos' do
-    expect(parser.videos).to eq([50, 50, 80, 30, 110])
+    expect(parser.videos.length).to eq(5)
+    expect(parser.videos[0].id).to eq(0)
+    expect(parser.videos[1].id).to eq(1)
+    expect(parser.videos[2].id).to eq(2)
+    expect(parser.videos[3].id).to eq(3)
+    expect(parser.videos[4].id).to eq(4)
+    expect(parser.videos[0].size).to eq(50)
+    expect(parser.videos[1].size).to eq(50)
+    expect(parser.videos[2].size).to eq(80)
+    expect(parser.videos[3].size).to eq(30)
+    expect(parser.videos[4].size).to eq(110)
   end
 
   it 'parses the first endpoint latency' do
+    expect(parser.endpoints[0].id).to eq(0)
+    expect(parser.endpoints[1].id).to eq(1)
     expect(parser.endpoints[0].datacenter_latency).to eq(1000)
   end
 
   it 'parses the first endpoint caches' do
     expect(parser.endpoints[0].caches.length).to eq(3)
-    expect(parser.endpoints[0].caches[0].index).to eq(0)
+    expect(parser.endpoints[0].caches[0].id).to eq(0)
     expect(parser.endpoints[0].caches[0].cache_latency).to eq(100)
-    expect(parser.endpoints[0].caches[1].index).to eq(2)
+    expect(parser.endpoints[0].caches[1].id).to eq(2)
     expect(parser.endpoints[0].caches[1].cache_latency).to eq(200)
-    expect(parser.endpoints[0].caches[2].index).to eq(1)
+    expect(parser.endpoints[0].caches[2].id).to eq(1)
     expect(parser.endpoints[0].caches[2].cache_latency).to eq(300)
   end
 
@@ -40,6 +52,13 @@ RSpec.describe Parser do
 
   it 'parses the request_descriptions' do
     expect(parser.request_descriptions.length).to eq(4)
+    expect(parser.request_descriptions[0].video_id).to eq(3)
+    expect(parser.request_descriptions[0].endpoint_id).to eq(0)
+    expect(parser.request_descriptions[0].num_requests).to eq(1500)
   end
 
+  it 'makes the correct references' do
+    expect(parser.request_descriptions[0].video).to eq(parser.videos[3])
+    expect(parser.request_descriptions[0].endpoint).to eq(parser.endpoints[0])
+  end
 end
