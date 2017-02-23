@@ -79,4 +79,8 @@ RSpec.describe Parser do
   it 'references the correct caches to the cache connections' do
     expect(parser.endpoints[0].cache_connections[1].cache).to eq(parser.caches[2])
   end
+
+  it 'references the cache connections in the cache' do
+    expect(parser.caches[1].cache_connections).to eq ([parser.endpoints[0].cache_connections[2]])
+  end
 end
