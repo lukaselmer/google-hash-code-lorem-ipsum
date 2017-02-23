@@ -18,7 +18,8 @@ class Export
   end
 
   def generate_file
-    File.write("output_#{Time.now.iso8601}.out", generate_export_data)
+    Dir.mkdir('out') unless Dir.exists?('out')
+    File.write("out/output_#{Time.now.iso8601}.out", generate_export_data)
   end
 
   def generate_export_data
