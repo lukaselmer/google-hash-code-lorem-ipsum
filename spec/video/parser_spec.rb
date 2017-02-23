@@ -37,17 +37,17 @@ RSpec.describe Parser do
   end
 
   it 'parses the first endpoint caches' do
-    expect(parser.endpoints[0].caches.length).to eq(3)
-    expect(parser.endpoints[0].caches[0].id).to eq(0)
-    expect(parser.endpoints[0].caches[0].cache_latency).to eq(100)
-    expect(parser.endpoints[0].caches[1].id).to eq(2)
-    expect(parser.endpoints[0].caches[1].cache_latency).to eq(200)
-    expect(parser.endpoints[0].caches[2].id).to eq(1)
-    expect(parser.endpoints[0].caches[2].cache_latency).to eq(300)
+    expect(parser.endpoints[0].cache_connections.length).to eq(3)
+    expect(parser.endpoints[0].cache_connections[0].cache_id).to eq(0)
+    expect(parser.endpoints[0].cache_connections[0].cache_latency).to eq(100)
+    expect(parser.endpoints[0].cache_connections[1].cache_id).to eq(2)
+    expect(parser.endpoints[0].cache_connections[1].cache_latency).to eq(200)
+    expect(parser.endpoints[0].cache_connections[2].cache_id).to eq(1)
+    expect(parser.endpoints[0].cache_connections[2].cache_latency).to eq(300)
   end
 
   it 'parses all endpoints incl caches' do
-    expect(parser.endpoints[1].caches.length).to eq(0)
+    expect(parser.endpoints[1].cache_connections.length).to eq(0)
   end
 
   it 'parses the request_descriptions' do
@@ -57,8 +57,15 @@ RSpec.describe Parser do
     expect(parser.request_descriptions[0].num_requests).to eq(1500)
   end
 
-  it 'makes the correct references' do
+  it 'makes the correct request description references' do
     expect(parser.request_descriptions[0].video).to eq(parser.videos[3])
     expect(parser.request_descriptions[0].endpoint).to eq(parser.endpoints[0])
   end
+
+  # it 'makes the correct endpoint references' do
+  #   expect(parser.endpoints[0].request_descriptions.length).to eq(3)
+  #   expect(parser.endpoints[0].request_descriptions[0]).to eq(parser.request_descriptions[0])
+  #   expect(parser.endpoints[0].request_descriptions[1]).to eq(parser.request_descriptions[2])
+  #   expect(parser.endpoints[0].request_descriptions[2]).to eq(parser.request_descriptions[3])
+  # end
 end
