@@ -41,12 +41,15 @@ RSpec.describe Parser do
       expect(parser.endpoints[0].cache_connections.length).to eq(3)
       expect(parser.endpoints[0].cache_connections[0].cache_id).to eq(0)
       expect(parser.endpoints[0].cache_connections[0].cache_latency).to eq(100)
+      expect(parser.endpoints[0].cache_connections[0].latency_delta).to eq(900)
       expect(parser.endpoints[0].cache_connections[0].endpoint).to eq(parser.endpoints[0])
       expect(parser.endpoints[0].cache_connections[1].cache_id).to eq(2)
       expect(parser.endpoints[0].cache_connections[1].cache_latency).to eq(200)
+      expect(parser.endpoints[0].cache_connections[1].latency_delta).to eq(800)
       expect(parser.endpoints[0].cache_connections[1].endpoint).to eq(parser.endpoints[0])
       expect(parser.endpoints[0].cache_connections[2].cache_id).to eq(1)
       expect(parser.endpoints[0].cache_connections[2].cache_latency).to eq(300)
+      expect(parser.endpoints[0].cache_connections[2].latency_delta).to eq(700)
       expect(parser.endpoints[0].cache_connections[2].endpoint).to eq(parser.endpoints[0])
     end
 
