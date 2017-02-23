@@ -11,7 +11,7 @@ RSpec.describe ScoreHash do
     let(:caches) { [cache_1] }
 
     let(:request_description_0) { RequestDescription.new(1, 0, 1000) }
-    let(:request_description_other) { RequestDescription.new(1, 0, 2000) }
+    let(:request_description_other) { RequestDescription.new(1, 1, 2000) }
     let(:request_descriptions) { [request_description_0, request_description_other] }
 
     let(:parameters){ {request_descriptions: request_descriptions, caches: caches} }
@@ -21,6 +21,10 @@ RSpec.describe ScoreHash do
 
     it 'calculates the correct result for the assignment 1, 1' do
       expect(subject.score_for_assignment(1, 1)).to eq 233_333
+    end
+
+    it 'has the correct request description' do
+      expect(subject.request_descriptions['1 0']).to eq request_description_0
     end
   end
 end
