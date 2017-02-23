@@ -5,13 +5,13 @@ require_relative '../../video/parser'
 RSpec.describe ScoreHash do
 
   describe '#score_for_assignment' do
-    let(:endpoint_0) { {id: 0, datacenter_latency: 1000, request_descriptions: [request_description_0]} }
-    let(:cache_connection_0_1) { {cache_id: 1, cache_latency: 300, endpoint: endpoint_0} }
-    let(:cache_1) { {id: 1, cache_size: 100, cache_connections: [cache_connection_0_1]} }
+    let(:endpoint_0) { Endpoint.new(0, 1000, nil, [request_description_0]) }
+    let(:cache_connection_0_1) { CacheConnection.new(1, 300, nil, endpoint_0) }
+    let(:cache_1) { Cache.new(1, 100, nil, [cache_connection_0_1]) }
     let(:caches) { [cache_1] }
 
-    let(:request_description_0) { {video_id: 1, endpoint_id: 0, num_requests: 1000} }
-    let(:request_description_other) { {video_id: 1, endpoint_id: 0, num_requests: 2000} }
+    let(:request_description_0) { RequestDescription.new(1, 0, 1000) }
+    let(:request_description_other) { RequestDescription.new(1, 0, 2000) }
     let(:request_descriptions) { [request_description_0, request_description_other] }
 
     let(:parameters){ {request_descriptions: request_descriptions, caches: caches} }
