@@ -1,6 +1,6 @@
 Video = Struct.new(:id, :size)
 Endpoint = Struct.new(:id, :datacenter_latency, :cache_connections, :request_descriptions)
-Cache = Struct.new(:id, :cache_size)
+Cache = Struct.new(:id, :cache_size, :videos)
 CacheConnection = Struct.new(:cache_id, :cache_latency, :cache)
 RequestDescription = Struct.new(:video_id, :endpoint_id, :num_requests, :video, :endpoint)
 
@@ -69,7 +69,7 @@ class Parser
 
   def initialize_caches
     @caches = []
-    num_caches.times { |id| @caches << Cache.new(id, cache_size) }
+    num_caches.times { |id| @caches << Cache.new(id, cache_size, []) }
   end
 
   def reference_caches_to_cache_connections

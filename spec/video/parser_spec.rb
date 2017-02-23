@@ -73,6 +73,7 @@ RSpec.describe Parser do
     expect(parser.caches.length).to eq(parser.num_caches)
     expect(parser.caches[1].id).to eq(1)
     expect(parser.caches[1].cache_size).to eq(parser.cache_size)
+    expect(parser.caches[1].videos).to eq([])
   end
 
   it 'references the correct caches to the cache connections' do
