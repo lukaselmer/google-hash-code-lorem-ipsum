@@ -1,1 +1,1 @@
-# google-hash-code-lorem-ipsum
+# Google Hash Code Lorem Ipsum
